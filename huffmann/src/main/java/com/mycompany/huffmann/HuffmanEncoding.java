@@ -1,10 +1,16 @@
 package com.mycompany.huffmann;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -159,6 +165,42 @@ public class HuffmanEncoding {
     printEncodingAux(n.getLeftChild(), code+"0");
     printEncodingAux(n.getRightChild(), code+"1");
   }
+  
+    public String readBinaryFile(String filename) {
+        File f = new File(filename);
+        StringBuilder sb = new StringBuilder();
+        try {
+            DataInputStream is = new DataInputStream(new FileInputStream(f));
+            BitSet bs = BitSet.valueOf(is.readAllBytes());
+            for(int i = 0; i < bs.length();i++) {
+                sb.append(bs.get(i)?"1":"0"); 
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+  
+    void createBinaryFile(String encoded, String testecompressedbin) {
+        File f = new File(testecompressedbin);
+        
+        int l = encoded.length();
+        
+        BitSet bs = new BitSet(l);
+        for(int i = 0; i < l; i++) {
+            char c = encoded.charAt(i);
+            if(c == '1') bs.set(i);
+        }
+        
+        try {
+            DataOutputStream os = new DataOutputStream(new FileOutputStream(f));
+            os.write(bs.toByteArray());
+            os.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     
 

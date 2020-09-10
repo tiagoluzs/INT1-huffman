@@ -30,6 +30,21 @@ public class App {
         String decoded = huff.decode(encoded);
         System.out.println("Decoded:");
         System.out.println(decoded);
+        
+        huff.createBinaryFile(encoded, "teste.compressed.bin");
+        
+        String readed = huff.readBinaryFile("teste.compressed.bin");
+        System.out.println("Readed: " + readed);
+        
+        if(readed.equals(encoded)) {
+            System.out.println("WORKED!");
+        } else {
+            System.out.println("FAILED :(");
+        }
+        
+        decoded = huff.decode(readed);
+        System.out.println("Decoded: " + decoded);
+        
         /*
         //FreqTable table = new FreqTable(3);
 
