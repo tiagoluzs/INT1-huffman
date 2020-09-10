@@ -5,7 +5,6 @@
  */
 package com.mycompany.huffmann;
 
-import java.util.Hashtable;
 import java.util.PriorityQueue;
 
 /**
@@ -18,7 +17,15 @@ public class App {
         HuffmanEncoding huff = new HuffmanEncoding();
         String content = huff.readTextFile("teste.txt");
         PriorityQueue<CharFreq> freq = huff.frequencyCalculate(content);
-        System.out.println(freq);
+        huff.setFt(freq);
+        huff.buildBinTree();
+        String encoded = huff.encode(content);
+        System.out.println("Encoded: " + encoded);
+        huff.printEncoding();
+        System.out.println("Content length: " + content.length());
+        System.out.println("Encoded length: " + encoded.length());
+        System.out.println(encoded);
+        
         /*
         //FreqTable table = new FreqTable(3);
 

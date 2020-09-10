@@ -6,14 +6,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public class HuffmanEncoding {
 
-  Hashtable<Character,Double> ft;
+  PriorityQueue<CharFreq> ft;
   BinTree bt;
+  HashMap<Character,CharFreq> hm;
+  
 
   public String readTextFile(String fileName) throws IOException {
       return new String(Files.readAllBytes(Path.of(new File(fileName).toURI())));
@@ -21,7 +23,7 @@ public class HuffmanEncoding {
 
   public PriorityQueue<CharFreq> frequencyCalculate(String content) {
       PriorityQueue<CharFreq> pq = new PriorityQueue<>();
-      HashMap<Character,CharFreq> hm = new HashMap<Character,CharFreq>();
+      hm = new HashMap<Character,CharFreq>();
 
       int l = content.length();
       for(int i = 0; i < l; i++) {
@@ -44,18 +46,18 @@ public class HuffmanEncoding {
 
   public HuffmanEncoding() {}
 
-  public HuffmanEncoding(Hashtable<Character,Double> frequencyTable){
+    public void setFt(PriorityQueue<CharFreq> ft) {
+        this.ft = ft;
+    }
 
-          ft = frequencyTable;
-          bt = buildBinTree();
 
-  }
-
-  private BinTree buildBinTree(){
+  public void buildBinTree(){
     int n = ft.size();
-    List<BinTree> Q = new ArrayList<BinTree>();
-    for(Character c : ft.keySet()){
-      Node tempNode = new Node(c,ft.get(c));
+    Iterator it = ft.iterator();
+    ArrayList<BinTree> Q = new ArrayList<>();
+    while(it.hasNext()) {
+      CharFreq cf = (CharFreq)it.next();
+      Node tempNode = new Node(cf.c,cf.freq);
       BinTree temp = new BinTree(tempNode);
       Q.add(temp);
     }
@@ -67,7 +69,7 @@ public class HuffmanEncoding {
       z.setFreq(z.getLeftChild().getFreq() + z.getRightChild().getFreq());
       Q.add(new BinTree(z));
     }
-    return extractMin(Q);
+    bt = extractMin(Q);
   }
 
   private BinTree extractMin(List<BinTree> Q){
@@ -83,7 +85,41 @@ public class HuffmanEncoding {
     Q.remove(iRemove);
     return result;
   }
-
+  
+  public String encode(String fileContent) {
+      int l = fileContent.length();
+      StringBuilder sb = new StringBuilder();
+      for(int i = 0; i < l; i++) {
+          char c = fileContent.charAt(i);
+          String s = getCharEncode(c);
+          System.out.println(c + " " + s);
+          sb.append(s);
+      }
+      return sb.toString();
+  }
+  
+  
+  private String getCharEncode(char c) {
+     CharFreq ch = hm.get(c);
+     StringBuilder sb = new StringBuilder();
+     Node n = bt.root;
+     while( n.getLeftChild() != null || n.getRightChild() != null ) {
+         if(ch.freq < n.getFreq()) {
+             sb.append("0");
+             n = n.getLeftChild();
+         } else {
+             sb.append("1");
+             n = n.getRightChild();
+         }
+     }
+     return sb.toString();
+  }
+  
+  
+  public String decode(String encodedContent) {
+     return "" ;
+  }
+  
   public void printEncoding(){
     printEncodingAux(bt.getRoot(),"");
   }
@@ -96,5 +132,9 @@ public class HuffmanEncoding {
     printEncodingAux(n.getLeftChild(), code+"0");
     printEncodingAux(n.getRightChild(), code+"1");
   }
+
+    
+
+   
 
 }
