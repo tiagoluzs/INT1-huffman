@@ -18,7 +18,7 @@ public class App {
         HuffmanEncoding huff = new HuffmanEncoding();
         String content = huff.readTextFile("teste.txt");
         PriorityQueue<CharFreq> freq = huff.frequencyCalculate(content);
-        
+        System.out.println(freq);
         /*
         //FreqTable table = new FreqTable(3);
 

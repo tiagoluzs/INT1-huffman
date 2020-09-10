@@ -42,7 +42,7 @@ public class CharFreq implements Comparable{
 
     @Override
     public String toString() {
-        return this.c + " " + this.freq;
+        return ((int)this.c) + " " + this.freq + "\n";
     }
     
 }
