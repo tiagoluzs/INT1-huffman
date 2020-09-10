@@ -27,7 +27,7 @@ public class App {
         System.out.println("Encoded:");
         System.out.println(encoded);
         
-        String decoded = huff.decode(encoded);
+        String decoded = huff.decode(encoded).trim();
         System.out.println("Decoded:");
         System.out.println(decoded);
         
@@ -36,14 +36,16 @@ public class App {
         String readed = huff.readBinaryFile("teste.compressed.bin");
         System.out.println("Readed: " + readed);
         
-        if(readed.equals(encoded)) {
-            System.out.println("WORKED!");
+        decoded = huff.decode(readed).trim();
+        System.out.println("Decoded: " + decoded);
+        
+        if(content.trim().equals(decoded.trim())) {
+            System.out.println("Worked!");
         } else {
-            System.out.println("FAILED :(");
+            System.out.println("Failed!");
         }
         
-        decoded = huff.decode(readed);
-        System.out.println("Decoded: " + decoded);
+        
         
         /*
         //FreqTable table = new FreqTable(3);
