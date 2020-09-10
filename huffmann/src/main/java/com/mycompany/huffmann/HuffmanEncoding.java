@@ -92,7 +92,6 @@ public class HuffmanEncoding {
       for(int i = 0; i < l; i++) {
           char c = fileContent.charAt(i);
           String s = getCharEncode(c);
-          System.out.println(c + " " + s);
           sb.append(s);
       }
       return sb.toString();
@@ -127,10 +126,26 @@ public class HuffmanEncoding {
         }
     }
   
-  // TODO: decode do conteudo
   public String decode(String content) {
-     return "";
+     int l = content.length();
+     Node n = bt.getRoot();
+     StringBuilder sb = new StringBuilder();
+     for(int i = 0; i < l; i++) {
+         char c = content.charAt(i);
+         if(c == '0') {
+             n = n.getLeftChild();
+         } else {
+             n = n.getRightChild();
+         }
+         if(n.getLeftChild() == null && n.getRightChild() == null) {
+             sb.append(n.getCharacter());
+             n = bt.getRoot();
+         }
+     }
+     return sb.toString();
   }
+  
+  
   
   public void printEncoding(){
     printEncodingAux(bt.getRoot(),"");

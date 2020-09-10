@@ -20,13 +20,16 @@ public class App {
         huff.setFt(freq);
         huff.buildBinTree();
         
-        String encoded = huff.encode(content);
-        System.out.println("Encoded: " + encoded);
+        System.out.println("Content:");
+        System.out.println(content);
         
-        System.out.println("Content length: " + content.length());
-        System.out.println("Encoded length: " + encoded.length());
+        String encoded = huff.encode(content);
+        System.out.println("Encoded:");
         System.out.println(encoded);
         
+        String decoded = huff.decode(encoded);
+        System.out.println("Decoded:");
+        System.out.println(decoded);
         /*
         //FreqTable table = new FreqTable(3);
 
