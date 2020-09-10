@@ -28,21 +28,21 @@ public class CharFreq implements Comparable{
         return c.c == this.c;
     } else return false;
     }
-    
+
     @Override
     public int compareTo(Object o) {
         CharFreq c = (CharFreq)o;
-        if(this.freq < c.freq) 
+        if(this.freq < c.freq)
             return 1;
-        else if(this.freq == c.freq) 
+        else if(this.freq == c.freq)
             return 0;
-        else 
+        else
             return -1;
     }
 
     @Override
     public String toString() {
-        return ((int)this.c) + " " + this.freq + "\n";
+        return ((int)this.c) + " (" + ((char)this.c) + ") " + this.freq + "\n";
     }
-    
+
 }
