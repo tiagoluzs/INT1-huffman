@@ -11,18 +11,6 @@ Luis Augusto Alves de Lima
 Tiago Luz da Silva
 
 
-Compilar:
-
-~# javac *.java
-
-
-
-Executar:
-
-
-~# java App
-
-
 Enunciado:
 
 
