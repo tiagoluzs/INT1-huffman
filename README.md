@@ -11,6 +11,22 @@ Luis Augusto Alves de Lima
 Tiago Luz da Silva
 
 
+Compilar:
+
+~# javac *.java
+
+
+
+Executar:
+
+
+~# java App
+
+
+Enunciado:
+
+
+
 1) Embora o artigo-exemplo se proponha a tratar do problema de compactação de dados em
 arquivos texto, observe que tanto o código-fonte em Java quanto o de Haskell não incluem
 a implementação de todas as etapas necessárias. Escolha Java ou Haskell e implemente:
