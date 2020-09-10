@@ -11,7 +11,7 @@ package com.mycompany.huffmann;
  */
 public class Node {
 
-    private char character;
+    private Integer character;
     private double freqVal;
     private Node leftChild;
     private Node rightChild;
@@ -20,7 +20,7 @@ public class Node {
 
     }
 
-    public Node(char character, double freqVal){
+    public Node(Integer character, double freqVal){
 
             this.character = character;
             this.freqVal = freqVal;
@@ -36,7 +36,7 @@ public class Node {
 
     }
 
-    public char getCharacter() {
+    public Integer getCharacter() {
         return character;
     }
 
