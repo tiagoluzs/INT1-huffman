@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
 public class HuffmanEncoding {
 
   PriorityQueue<CharFreq> ft;
-  BinTree bt;
+  public BinTree bt;
   HashMap<Character,CharFreq> hm;
   
 
@@ -99,25 +99,37 @@ public class HuffmanEncoding {
   }
   
   
-  private String getCharEncode(char c) {
-     CharFreq ch = hm.get(c);
-     StringBuilder sb = new StringBuilder();
+  public String getCharEncode(char c) {
      Node n = bt.root;
-     while( n.getLeftChild() != null || n.getRightChild() != null ) {
-         if(ch.freq < n.getFreq()) {
-             sb.append("0");
-             n = n.getLeftChild();
-         } else {
-             sb.append("1");
-             n = n.getRightChild();
-         }
-     }
-     return sb.toString();
+     boolean found = false;
+     return getCharEncodeAux("",c,n);
   }
   
+    private String getCharEncodeAux(String code, char c, Node n) {
+        if(n.getLeftChild() == null && n.getRightChild() == null) {
+            if(n.getCharacter() == c) {
+                return code;
+            } else {
+                return null;
+            }
+        } else {
+            Node nn = n.getLeftChild();
+            String l = getCharEncodeAux(code+"0", c, nn);
+            if(l != null) {
+                return l;
+            }
+            nn = n.getRightChild();
+            String r = getCharEncodeAux(code+"1", c, nn);
+            if(r != null) {
+                return r;
+            } 
+            return null;
+        }
+    }
   
-  public String decode(String encodedContent) {
-     return "" ;
+  // TODO: decode do conteudo
+  public String decode(String content) {
+     return "";
   }
   
   public void printEncoding(){
@@ -132,6 +144,8 @@ public class HuffmanEncoding {
     printEncodingAux(n.getLeftChild(), code+"0");
     printEncodingAux(n.getRightChild(), code+"1");
   }
+
+    
 
     
 

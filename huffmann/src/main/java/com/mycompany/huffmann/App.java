@@ -19,9 +19,10 @@ public class App {
         PriorityQueue<CharFreq> freq = huff.frequencyCalculate(content);
         huff.setFt(freq);
         huff.buildBinTree();
+        
         String encoded = huff.encode(content);
         System.out.println("Encoded: " + encoded);
-        huff.printEncoding();
+        
         System.out.println("Content length: " + content.length());
         System.out.println("Encoded length: " + encoded.length());
         System.out.println(encoded);
