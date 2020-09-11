@@ -11,6 +11,41 @@ Luis Augusto Alves de Lima
 Tiago Luz da Silva
 
 
+
+
+Para compilar:
+
+
+~# cd huffmann
+
+
+~# mvn clean package -Dcom.mycompany.huffmann.App
+
+
+
+
+Para compactar:
+
+~# cd target
+
+~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> compactar
+
+
+
+
+Para descompactar:
+
+~# cd target
+
+~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> descompactar
+
+
+
+
+
+
+
+
 Enunciado:
 
 

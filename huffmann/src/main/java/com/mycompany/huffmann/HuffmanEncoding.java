@@ -4,9 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -132,8 +132,37 @@ public class HuffmanEncoding {
         }
     }
   
-  public String decode(String content) {
+  public String decode(String content,boolean parseFreqTable) {
+     int realContentLength = 0;
+     
+     if(parseFreqTable) {
+        StringBuilder ft = new StringBuilder();
+        for(int i = 0; i < content.length(); i+=8) {
+            // se os dois próximos caracteres são || em binário, 
+            // entende que encerrou a tabela de frequencia e começam os dados
+            if(content.substring(i,i+16).equals("0111110001111100")) { // ||
+                content = content.substring(i+16);
+                break;
+            } else {
+                ft.append((char)Integer.parseInt(content.substring(i,i+8), 2));
+            }
+        }
+        String t[] = ft.toString().split("\\|");
+        this.ft = new PriorityQueue<CharFreq>();
+        for(String it : t) {
+            String itt[] = it.split(",");
+            int c = Integer.valueOf(itt[0]);
+            CharFreq cf = new CharFreq((char)c, Long.valueOf(itt[1]));
+            this.ft.offer(cf);
+            realContentLength += cf.freq;
+        }
+        
+        this.buildBinTree();
+     }
+     
+     
      int l = content.length();
+     int qtdCaracteres = 0;
      Node n = bt.getRoot();
      StringBuilder sb = new StringBuilder();
      for(int i = 0; i < l; i++) {
@@ -144,7 +173,11 @@ public class HuffmanEncoding {
              n = n.getRightChild();
          }
          if(n.getLeftChild() == null && n.getRightChild() == null) {
+             qtdCaracteres++;
              sb.append(n.getCharacter());
+             if(realContentLength == qtdCaracteres) {
+                 break;
+             }
              n = bt.getRoot();
          }
      }
@@ -181,8 +214,8 @@ public class HuffmanEncoding {
         return sb.toString();
     }
   
-    void createBinaryFile(String encoded, String testecompressedbin) {
-        File f = new File(testecompressedbin);
+    void createBinaryFile(String encoded, String arquivo) {
+        File f = new File(arquivo);
         
         int l = encoded.length();
         
@@ -201,6 +234,40 @@ public class HuffmanEncoding {
         }
 
     }
+
+    public String priorityQueue2bin(PriorityQueue<CharFreq> freq) {
+        Iterator it = freq.iterator();
+        StringBuilder sb = new StringBuilder();
+        while(it.hasNext()) {
+            CharFreq cf = (CharFreq)it.next();
+            sb.append(((int)cf.c) + "," + cf.freq + "|");
+        }
+        sb.append("|"); // barra dupla marca o fim da tabela de frequencias
+        String s = sb.toString();
+        
+        StringBuilder sbb = new StringBuilder();
+        for(int i = 0; i < s.length();i++) {
+            sbb.append(pad(Integer.toBinaryString(s.charAt(i)),8));
+        }
+        return sbb.toString();
+    }
+    
+    private String pad(String s, int l) {
+        return String.format("%1$" + l + "s", s).replace(' ', '0');
+    }
+
+    void createTextFile(String decoded, String file)  {
+        try {
+            FileOutputStream fos = new FileOutputStream(new File(file));
+            fos.write(decoded.getBytes());
+            fos.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    
 
     
 

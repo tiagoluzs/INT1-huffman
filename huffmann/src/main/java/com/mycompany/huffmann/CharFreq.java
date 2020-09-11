@@ -11,12 +11,12 @@ package com.mycompany.huffmann;
  */
 public class CharFreq implements Comparable{
     public char c;
-    public double freq;
+    public long freq;
 
     public CharFreq() {
     }
 
-    public CharFreq(char c, int freq) {
+    public CharFreq(char c, long freq) {
         this.c = c;
         this.freq = freq;
     }
