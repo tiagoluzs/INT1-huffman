@@ -42,6 +42,12 @@ Para descompactar:
 
 
 
+Para exibir tabela de frequencia:
+
+~# cd target
+
+~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> tabela
+
 
 
 

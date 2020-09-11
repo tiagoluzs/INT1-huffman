@@ -32,8 +32,8 @@ public class App {
             System.exit(-1);
         }
         
-        if(!args[1].equals("compactar") && !args[1].equals("descompactar")) {
-            System.err.println("Informe um comando válido: compactar ou descompactar");
+        if(!args[1].equals("compactar") && !args[1].equals("descompactar") && !args[1].equals("tabela")) {
+            System.err.println("Informe um comando válido: compactar, descompactar, tabela");
             System.exit(-1);
         }
         
@@ -52,6 +52,14 @@ public class App {
             String decoded = huff.decode(readed,true);
             huff.createTextFile(decoded, args[0]+".descompactado");
             System.out.println("Arquivo descompactado: " + args[0]+".descompactado");
+        } else if(args[1].equals("tabela")) {
+            String content = huff.readTextFile(args[0]);
+            PriorityQueue<CharFreq> freq = huff.frequencyCalculate(content);
+            System.out.println("Tabel de frequencia\n");
+            while(!freq.isEmpty()) {
+                System.out.println(freq.poll());
+            }
+            System.exit(0);
         }
     }
     
