@@ -56,9 +56,10 @@ public class HuffmanEncodingTest {
             fos.close();
             HuffmanEncoding huff = new HuffmanEncoding();
             content = huff.readTextFile(filename);
+            f.deleteOnExit();
         } catch(Exception e) {
             e.printStackTrace();
-        }
+        } 
         Assert.assertEquals("Conteúdo do arquivo esperado está incorreto.", content, filename);
     }
     
