@@ -1,10 +1,10 @@
 package com.mycompany.huffmann;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,7 +27,12 @@ public class HuffmanEncoding {
       return new String(Files.readAllBytes(Path.of(new File(fileName).toURI())));
   }
 
-  public PriorityQueue<CharFreq> frequencyCalculate(String content) {
+  public PriorityQueue<CharFreq> frequencyCalculate(String content)  {
+      
+      if(content == null || content.length() == 0) {
+          return null;
+      }
+      
       PriorityQueue<CharFreq> pq = new PriorityQueue<>();
       hm = new HashMap<Character,CharFreq>();
 
@@ -267,12 +272,6 @@ public class HuffmanEncoding {
         
     }
     
-    
-
-    
-
-    
-
-   
-
+ 
 }
+
