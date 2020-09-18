@@ -4,34 +4,48 @@
 # Grupo:
 
 Ana Luiza de Azambuja Mattos
+
 Igor de Souza Couto
+
 Luis Augusto Alves de Lima
+
 Tiago Luz da Silva
+
 
 # Para compilar:
 
 ~# cd huffmann
+
 ~# mvn clean package -Dcom.mycompany.huffmann.App
+
 
 # Para rodar testes unitários:
 
 ~# cd huffmann
+
 ~# mvn test
+
 
 # Para compactar:
 
 ~# cd target
+
 ~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> compactar
 
 # Para descompactar:
 
 ~# cd target
+
 ~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> descompactar
+
 
 # Para exibir tabela de frequencia:
 
 ~# cd target
+
 ~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> tabela
+
+
 
 # Enunciado:
 
