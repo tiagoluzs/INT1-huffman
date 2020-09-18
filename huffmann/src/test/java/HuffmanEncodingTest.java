@@ -56,7 +56,7 @@ public class HuffmanEncodingTest {
             fos.close();
             HuffmanEncoding huff = new HuffmanEncoding();
             content = huff.readTextFile(filename);
-            f.deleteOnExit();
+            f.delete();
         } catch(Exception e) {
             e.printStackTrace();
         } 

@@ -22,6 +22,15 @@ Para compilar:
 ~# mvn clean package -Dcom.mycompany.huffmann.App
 
 
+Para rodar testes unitários:
+
+
+~# cd huffmann
+
+
+~# mvn test
+
+
 
 
 Para compactar:
