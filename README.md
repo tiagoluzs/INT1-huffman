@@ -1,69 +1,39 @@
 # INT1-huffman
 
-Grupo:
+
+# Grupo:
 
 Ana Luiza de Azambuja Mattos
-
 Igor de Souza Couto
-
 Luis Augusto Alves de Lima
-
 Tiago Luz da Silva
 
-
-
-
-Para compilar:
-
+# Para compilar:
 
 ~# cd huffmann
-
-
 ~# mvn clean package -Dcom.mycompany.huffmann.App
 
-
-Para rodar testes unitários:
-
+# Para rodar testes unitários:
 
 ~# cd huffmann
-
-
 ~# mvn test
 
-
-
-
-Para compactar:
+# Para compactar:
 
 ~# cd target
-
 ~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> compactar
 
-
-
-
-Para descompactar:
+# Para descompactar:
 
 ~# cd target
-
 ~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> descompactar
 
-
-
-
-Para exibir tabela de frequencia:
+# Para exibir tabela de frequencia:
 
 ~# cd target
-
 ~# java -cp huffmann-1.0-SNAPSHOT.jar com.mycompany.huffmann.App <NOME_DO_ARQUIVO> tabela
 
-
-
-
-
-Enunciado:
-
-
+# Enunciado:
 
 1) Embora o artigo-exemplo se proponha a tratar do problema de compactação de dados em
 arquivos texto, observe que tanto o código-fonte em Java quanto o de Haskell não incluem
